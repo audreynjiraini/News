@@ -1,5 +1,5 @@
-import urllib.request, json
-from .models import Sources
+import urllib.request,json
+from .models import Sources,Articles
 
 api_key = None
 
@@ -12,24 +12,24 @@ def configure_request(app):
     base_url = app.config['NEWS_SOURCES_BASE_URL']
     
     
-def get_sources():
+def get_sources(category):
 	'''
 	Function that gets the json response to url request
 	'''
  
-	get_sources_url = base_url.format(api_key)
+	get_sources_url=base_url.format(category,api_key)
 
 	with urllib.request.urlopen(get_sources_url) as url:
 		get_sources_data = url.read()
 		get_sources_response = json.loads(get_sources_data)
 
-		news_results = None
+		sources_results = None
 
-		if get_sources_response['results']:
-			sources_results_list = get_sources_response['results']
-			sources_results = process_results(sources_results_list)
+		if get_sources_response['sources']:
+			sources_results_list = get_sources_response['sources']
+			sources_results = process_sources(sources_results_list)
 
-	return news_results
+	return sources_results
 
 
 def process_sources(sources_list):
@@ -53,7 +53,7 @@ def process_sources(sources_list):
 		country = source_item.get('country')
 
 
-		sources_object = Sources(id,name,description,url,category,country,language)
+		sources_object = Sources(id,name,description,url,category,language,country)
 		sources_results.append(sources_object)
 
 
@@ -72,6 +72,7 @@ def get_articles(id):
 
 
 		articles_object = None
+  
 		if articles_results['articles']:
 			articles_object = process_articles(articles_results['articles'])
 
