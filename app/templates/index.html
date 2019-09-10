@@ -1,1 +1,42 @@
-<h1>{{title}}</h1>
+{% import 'macros.html' as macro %}
+
+{% block content%}
+<div class="container-fluid">
+		<!-- Business News Section  -->
+        <h3> Business News Sources</h3>
+        <hr>
+
+        {{ macro.displaySourceList(bus_sources) }}
+
+        <!-- Technology News Section  -->
+         
+        <h3> Technology News Sources</h3>
+        <hr>
+
+        {{ macro.displaySourceList(tech_sources) }}
+
+        <!-- Political News Section  -->
+         
+        <h3> Politics News Sources</h3>
+        <hr>
+
+        {{ macro.displaySourceList(sources) }}
+
+        <!-- Entertainment News Section  -->
+         
+        <h3> Entertainment News Sources</h3>
+        <hr>
+
+        {{ macro.displaySourceList(ent_sources) }}
+
+        <!-- Sports News Section  -->
+         
+        <h3> Sports News Sources</h3>
+        <hr>
+
+        {{ macro.displaySourceList(sports_sources) }}
+	
+</div>
+
+
+{% endblock %}
