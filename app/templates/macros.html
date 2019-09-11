@@ -1,11 +1,11 @@
 {% macro displaySourceList(source_list) %}
 
-    {% for source_row in source_list |batch(4)%}
+    {% for source_row in source_list |batch(6)%}
     <div class="row">
         
             
         {% for sources in source_row %}
-            <div class="col-md-3">
+            <div class="col-md-2">
                 
                 <div class="card card-default">
                     <div class="card-title">

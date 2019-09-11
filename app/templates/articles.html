@@ -1,17 +1,24 @@
 {% extends 'base.html' %}
 
+<!-- Styles block -->
+
+{% block styles%}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/articles.css')}}">
+{% endblock %}
+
 <!-- Content block -->
 {% block content%}
 <div class="container-fluid">
 
-        <h3> Top Headlines </h3>
-        {% for article_row in articles | batch(4) %}
+        <h3 class="text-center"> Top Headlines </h3>
+        {% for article_row in articles | batch(6) %}
 
 	        <div class="row">
 	       
 		        {% for article in article_row %}
 
-		        	<div class="col-md-3">
+		        	<div class="col-md-2">
 				        <div class="thumbnail">
 				        <a href="{{ article.url }}" target="_blank">
 						      <img src="{{ article.image }}" alt="{{ article.title }}" class="img-responsive">
